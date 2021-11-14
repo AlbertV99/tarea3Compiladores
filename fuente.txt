@@ -11,7 +11,7 @@
       },
       {
          "ci":7654321,
-         "nombre":"Juan Gómez,
+         "nombre":"Juan Gómez"
          "casado":true,
          "hijos":[
             {

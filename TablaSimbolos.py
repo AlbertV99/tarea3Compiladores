@@ -45,5 +45,5 @@ class TablaSimbolos:
         for tokenTemp in self.tablaTokens:
             if(tokenTemp.validar(valor)):
                 return (tokenTemp.obtenerToken(),valor)
-
+            
         raise Exception("Caracter invalido encontrado <"+valor+">")

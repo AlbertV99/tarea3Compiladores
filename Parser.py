@@ -37,6 +37,7 @@ class Parser:
             self.posicion_analisis=0
 
     def analisisSintactico(self):
+        self.posicion_analisis=0
         self.resultado_sintactico = self.validarJson()
 
     def validarJson(self):
@@ -78,11 +79,15 @@ class Parser:
             self.match('DOS_PUNTOS')
             self.posicion_analisis+=1
             self.validarValorAtributo()
-            if(self.resultado_lexico[self.posicion_analisis][0]=='R_LLAVE'):
-                break
-            elif (self.resultado_lexico[self.posicion_analisis][0]=='COMA'):
+            if (self.resultado_lexico[self.posicion_analisis][0]=='COMA'):
+                self.match('COMA')
                 self.posicion_analisis+=1
                 continue
+            elif(self.resultado_lexico[self.posicion_analisis][0]=='R_LLAVE'):
+                break
+            else:
+                print(self.posicion_analisis)
+                raise Exception("Se esperaba Token >COMA< o >R_LLAVE< valor obtenido>"+self.resultado_lexico[self.posicion_analisis][1]+"<")
 
     def validarClaveAtributo(self):
         self.match('LITERAL_CADENA')

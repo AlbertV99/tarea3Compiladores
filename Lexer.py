@@ -26,7 +26,6 @@ class Lexer():
             self.cadenaError = ""
             try:
                 while (caracter != EOF) :
-                    # print(caracter)
                     if(caracter == '\n' or caracter == ' ' or caracter == '\t'):
                         caracter = fichero.readline(1)
                         continue
@@ -44,7 +43,6 @@ class Lexer():
                             self.actualizar_errores()
                             temp = self.procesar_numerico(fichero,caracter)
                             self.lista_tokens.append(temp)
-                            fichero.seek(fichero.tell()-1)
                         elif (caracter == '"'):
                             self.actualizar_errores()
                             temp = self.procesar_cadena(fichero,caracter)
@@ -83,6 +81,9 @@ class Lexer():
             cadenaTemp += caracter
             caracter = fichero.readline(1)
 
+        fichero.seek(fichero.tell()-1)
+
+
         return self.tabla.verificarToken(cadenaTemp)
 
     def procesar_cadena(self,fichero,cadenaTemp):
@@ -101,13 +102,17 @@ class Lexer():
 
     def procesar_numerico(self,fichero,cadenaTemp):
         #avanzar en el buffer hasta encontrar un caracter que no coincida con la comparacion de la tabla de simbolos
-        caracter = fichero.readline(1)
-        while(self.tabla.verificarToken(cadenaTemp)[0] == 'LITERAL_NUM' and caracter !='\n') :
-            cadenaTemp += caracter
+        caracter = cadenaTemp
+        while(True):
             caracter = fichero.readline(1)
+            if( (caracter == '\n' or caracter == ' ' or caracter == '\t' )):
+                break
+            if(self.tabla.verificarToken(caracter)[0] != 'LITERAL_NUM') :
+                fichero.seek(fichero.tell()-1)
+                break
 
 
-        cadenaTemp = cadenaTemp[:-1]
+            cadenaTemp += caracter
         return self.tabla.verificarToken(cadenaTemp)
 
 

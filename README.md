@@ -35,4 +35,15 @@ atribute value → element | string.sin-comillas | number | true | false | null
 
 
 
+instrucciones para ejecucion 
+
+ejecutar el archivo traductor.py y automaticamente se ejecutaran los analizadores y se devolvera la traduccion a XML 
+exec(open("traductor.py").read())
+
+
+
+
+
+
+
 

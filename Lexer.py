@@ -18,7 +18,7 @@ class Lexer():
         self.inicializar_archivo_salida()
 
     def procesar_fichero(self):
-
+        self.lista_tokens = []
         with open(self.archivo_entrada) as fichero:
             caracter = fichero.readline(1)
             tabs = 0
@@ -114,10 +114,3 @@ class Lexer():
 
             cadenaTemp += caracter
         return self.tabla.verificarToken(cadenaTemp)
-
-
-def main():
-    pass
-
-if (__name__ == '__main__') :
-    main()

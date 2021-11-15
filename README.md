@@ -41,7 +41,8 @@ ejecutar el archivo traductor.py y automaticamente se ejecutaran los analizadore
 exec(open("traductor.py").read())
 
 
-
+- Victor Garcete (4.365.710)
+- Alberto Valdez (5.031.168)
 
 
 
